@@ -14,13 +14,13 @@ public:
 	Guard(Ogre::SceneManager* sceneManager,const std::string& guardMesh,const std::string& guardName,const Ogre::Vector3& startPosition);
 	Guard(Ogre::SceneManager* sceneManager,const std::string& guardMesh,const std::string& guardName, std::deque<Ogre::Vector3>& positions);
 	~Guard(void);
-	virtual void update(const float delay);
+	virtual void update(float delay);
 	virtual bool nextLocation(void);
 
 protected:
 	virtual bool collision(void);
 	virtual void goToNextLocation(void);
-	Ogre::Vector3 getDirection(const Ogre::Quaternion q) const;
+	Ogre::Vector3 getDirection(const Ogre::Quaternion& q) const;
 	
 	Ogre::SceneManager* manager;
 	Ogre::SceneNode* sceneNode;

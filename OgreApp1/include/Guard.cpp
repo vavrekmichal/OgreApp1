@@ -62,7 +62,7 @@ bool Guard::nextLocation(void){
 //-------------------------------------------------------------------------------------
 ///This is main function of guards walking. Here is control if guard has some destination
 ///to go and setted animation Walk/Idle.
-void Guard::update(const float delay){
+void Guard::update(float delay){
 
 	mAnimationState->addTime(delay);
 	if (mDirection == Ogre::Vector3::ZERO){
@@ -121,7 +121,7 @@ bool Guard::collision(void){
 }
 //-------------------------------------------------------------------------------------
 ///Translate quaternion into direction vector
- Ogre::Vector3 Guard::getDirection(const Ogre::Quaternion q) const{
+ Ogre::Vector3 Guard::getDirection(const Ogre::Quaternion& q) const{
 	Ogre::Vector3 v(1, 0, 0); //facing in +z
 	v = q * v;  //transform the vector by the objects rotation.
 	return v;

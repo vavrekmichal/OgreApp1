@@ -26,7 +26,7 @@ bool GuardRandom::nextLocation(void){
 }
 //-------------------------------------------------------------------------------------
 ///Calling base update
-void GuardRandom::update(const float delay){
+void GuardRandom::update(float delay){
 	Guard::update(delay);	
 }
 //-------------------------------------------------------------------------------------

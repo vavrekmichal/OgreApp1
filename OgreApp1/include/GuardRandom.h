@@ -11,7 +11,7 @@ public:
 	GuardRandom(Ogre::SceneManager* sceneManager, const std::string& guardMesh, const std::string& guardName, const Ogre::Vector3& down, const Ogre::Vector3& up);
 	virtual ~GuardRandom(void);
 	virtual bool nextLocation(void);
-	virtual void update(const float delay);
+	virtual void update(float delay);
 private:
 	float minX;
 	float maxX;

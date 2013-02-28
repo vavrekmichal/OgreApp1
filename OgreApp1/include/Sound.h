@@ -22,7 +22,7 @@ class Sound : irrklang::ISoundStopEventReceiver
 {
 public:
 	
-	Sound(const char* path, const int width, const int height);
+	Sound(const char* path, int width, int height);
 	~Sound(void);
 	void playNext(void);
 	virtual void OnSoundStopped (irrklang::ISound* sound, irrklang::E_STOP_EVENT_CAUSE reason, void* userData);
@@ -36,7 +36,7 @@ public:
 	void pauseSong(void);
 
 private:
-	void setVolume(const int diff);
+	void setVolume(int diff);
 	static const int overlayDurationConst;
 };
 

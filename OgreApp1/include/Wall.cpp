@@ -2,7 +2,7 @@
 
 //-------------------------------------------------------------------------------------
 ///Inicializetion and set direction based on isHorizontal (use roll and pitch)
-Wall::Wall(Ogre::SceneManager* sceneManager, const std::string& wallName, const Ogre::Vector3& startPosition, const bool isHorizontal)
+Wall::Wall(Ogre::SceneManager* sceneManager, const std::string& wallName, const Ogre::Vector3& startPosition, bool isHorizontal)
 {
 	manager = sceneManager;
 	name=wallName;

@@ -10,7 +10,7 @@ public:
 	GuardLine(Ogre::SceneManager* sceneManager, const std::string& guardMesh, const std::string& guardName, std::deque<Ogre::Vector3>& positions);
 	virtual ~GuardLine(void);
 	virtual bool nextLocation(void);
-	virtual void update(const float delay);
+	virtual void update(float delay);
 private:
 	std::deque<Ogre::Vector3> mWalkList;   // The list of points to go
 };

@@ -11,7 +11,7 @@ public:
 	GuardFollower(Ogre::SceneManager* sceneManager,const std::string& guardMesh,const std::string& guardName,const Ogre::Vector3& startPosition);
 	virtual ~GuardFollower(void);
 	virtual bool nextLocation(void);
-	virtual void update(const float delay);
+	virtual void update(float delay);
 private:
 	Ogre::SceneNode* toFollow; //in this case it is playes (his SceneNode)
 };

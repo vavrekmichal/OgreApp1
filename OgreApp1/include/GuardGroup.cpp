@@ -41,7 +41,7 @@ GuardGroup::~GuardGroup(void)
 }
 //-------------------------------------------------------------------------------------
 ///update all guards in group
-void GuardGroup::update(const float delay){
+void GuardGroup::update(float delay){
 	for(std::vector<std::shared_ptr<Guard>>::iterator it = guards.begin();
 		it!=guards.end();
 		++it){

@@ -3,7 +3,7 @@
 
 //-------------------------------------------------------------------------------------
 ///Create given number of wall in given direction
-WallLine::WallLine(Ogre::SceneManager* manager, const int x, const int y, const Ogre::Vector2& v, const MyDirection& m)
+WallLine::WallLine(Ogre::SceneManager* manager, int x, int y, const Ogre::Vector2& v, const MyDirection& m)
 {
 	int a = 0;
 	int b = 0;
@@ -37,7 +37,7 @@ WallLine::WallLine(Ogre::SceneManager* manager, const int x, const int y, const 
 
 			Ogre::Vector3 posVec = Ogre::Vector3(posX, c, posZ);
 			std::stringstream ss;
-			ss<<"name" << a << b << c << genRandom(5);
+			ss<<"wall" << a << b << c << genRandom(5);
 			std::shared_ptr<Wall> helpWall = (std::shared_ptr<Wall>) new Wall(
 				manager, 
 				ss.str(), 
@@ -52,7 +52,7 @@ WallLine::WallLine(Ogre::SceneManager* manager, const int x, const int y, const 
 }
 //-------------------------------------------------------------------------------------
 ///using random string like prevention of collision in entity and sceneNode register
-std::string WallLine::genRandom( const size_t length)
+std::string WallLine::genRandom( size_t length)
 {
     auto randchar = []() -> char
     {

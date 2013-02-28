@@ -9,7 +9,7 @@
 class Wall
 {
 public:
-	Wall(Ogre::SceneManager* sceneManager, const std::string& wallName, const Ogre::Vector3& startPosition, const bool isHorizontal);
+	Wall(Ogre::SceneManager* sceneManager, const std::string& wallName, const Ogre::Vector3& startPosition, bool isHorizontal);
 	~Wall(void);
 
 protected:

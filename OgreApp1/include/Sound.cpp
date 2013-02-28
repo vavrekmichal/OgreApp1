@@ -23,7 +23,7 @@ int volume = 5;
 #endif
 //-------------------------------------------------------------------------------------
 ///Load all songs, initializes overlay and play first
-Sound::Sound(const char* path, const int width, const int height)
+Sound::Sound(const char* path, int width, int height)
 {
 	engine = irrklang::createIrrKlangDevice();
 	
@@ -138,7 +138,7 @@ void Sound::showVolume(void){
 }
 //-------------------------------------------------------------------------------------
 ///set given volume
-void Sound::setVolume(const int diff){
+void Sound::setVolume(int diff){
 	volume +=diff; 
 	if(volume<0)volume = 0;
 	if(volume>10)volume = 10;

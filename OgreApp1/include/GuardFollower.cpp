@@ -17,7 +17,7 @@ GuardFollower::GuardFollower(Ogre::SceneManager* sceneManager,const std::string&
 	toFollow = sceneManager->getSceneNode("NinjaNode");
 }
 //-------------------------------------------------------------------------------------
-void GuardFollower::update(const float delay){
+void GuardFollower::update(float delay){
 	Guard::update(delay);	
 }
 //-------------------------------------------------------------------------------------

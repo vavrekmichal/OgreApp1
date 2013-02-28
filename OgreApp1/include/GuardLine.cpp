@@ -27,7 +27,7 @@ GuardLine::GuardLine(Ogre::SceneManager* sceneManager, const std::string& guardM
 }
 //-------------------------------------------------------------------------------------
 ///Calling base update
-void GuardLine::update(const float delay){
+void GuardLine::update(float delay){
 	Guard::update(delay);	
 }
 //-------------------------------------------------------------------------------------

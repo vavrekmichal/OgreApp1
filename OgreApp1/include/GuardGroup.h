@@ -18,7 +18,7 @@ public:
 	GuardGroup(void);
 	GuardGroup(Ogre::SceneManager* sceneManager, const std::string& guardMesh, const std::string& groupName, const int count, std::deque<Ogre::Vector3>& positions, const GuardType type);
 	~GuardGroup(void);
-	void update(const float delay);
+	void update(float delay);
 
 private:
 	std::vector<std::shared_ptr<Guard>> guards;

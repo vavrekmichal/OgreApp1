@@ -36,7 +36,7 @@ Player::~Player(void)
 }
 //-------------------------------------------------------------------------------------
 ///Checkes collision in going direction and translate SceneNode
-void Player::update(const float f){
+void Player::update(float f){
 	Ogre::Vector3 playerMove = Ogre::Vector3(0,0,0);
 	mWalking = false;
 	if(goingForward && !collision(true)){
@@ -53,7 +53,7 @@ void Player::update(const float f){
 }
 //-------------------------------------------------------------------------------------
 ///control player status (walk,stay,death) and set right animation
-void Player::walk(const float f){
+void Player::walk(float f){
 	
 	if (!death) {
 		mAnimationState->addTime(f*2);
@@ -75,7 +75,7 @@ void Player::walk(const float f){
 }
 //-------------------------------------------------------------------------------------
 ///controls collision in given direction (true-front false-back)
-bool Player::collision(const bool goAhead){
+bool Player::collision(bool goAhead){
 	Ogre::Ray ray = Ogre::Ray(sceneNode->getPosition(), getDirection(sceneNode->getOrientation(),goAhead));
 	Ogre::RaySceneQuery* mRaySceneQuery = manager->createRayQuery(ray);
 	Ogre::RaySceneQueryResult result = mRaySceneQuery->execute();
@@ -91,7 +91,7 @@ bool Player::collision(const bool goAhead){
 }
 //-------------------------------------------------------------------------------------
 ///transform quaternion in given direction
-Ogre::Vector3 Player::getDirection(const Ogre::Quaternion q,const bool goAhead) {
+Ogre::Vector3 Player::getDirection(const Ogre::Quaternion& q, bool goAhead) {
 	Ogre::Vector3 v = Ogre::Vector3(0, 0, 0);
 	if(goAhead){
 		v =  Ogre::Vector3(0, 0, -1);

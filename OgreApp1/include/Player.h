@@ -11,7 +11,7 @@ class Player
 public:
 	Player(Ogre::SceneManager* sceneManager, const std::string& playerMesh, const std::string& playerName, const Ogre::Vector3& startPosition);
 	~Player(void);
-	void update(const float f);
+	void update(float f);
 	Ogre::SceneNode* getSceneNode(void);
 
 	bool goingForward;
@@ -21,8 +21,8 @@ public:
 protected:
 
 	void walk(float f);
-	bool collision(const bool goAhead);
-	Ogre::Vector3 getDirection(const Ogre::Quaternion q, const bool goAhead);
+	bool collision(bool goAhead);
+	Ogre::Vector3 getDirection(const Ogre::Quaternion& q, bool goAhead);
 
 	Ogre::SceneNode* sceneNode;
 	Ogre::Entity* entity;
