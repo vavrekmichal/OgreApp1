@@ -20,7 +20,7 @@ GuardGroup::GuardGroup(Ogre::SceneManager* sceneManager, const std::string& guar
 			break;
 		case Follower:
 			for(int i = 0; i< count; ++i){
-				guards.push_back((std::shared_ptr<Guard>) new GuardFollower( sceneManager, guardMesh, createName(groupName,i), positions.at(1)));
+				guards.push_back((std::shared_ptr<Guard>) new GuardFollower( sceneManager, guardMesh, createName(groupName,i), positions.at(0)));
 				rotateDeque(positions);
 			}
 			break;

@@ -7,7 +7,7 @@ WallLine::WallLine(Ogre::SceneManager* manager, int x, int y, const Ogre::Vector
 {
 	int a = 0;
 	int b = 0;
-	float c = blockLength/2;
+	float c = blockLength / 2.0f;
 		
 	bool isHorizontal = false;
 	if(m ==Left || m == Right){

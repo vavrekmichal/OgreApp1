@@ -318,8 +318,7 @@ void OgreApp1::createWalls(void){
 						}
 					}
 				}
-			}
-			
+			}	
 			walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr, height, width, Ogre::Vector2(x, y), type));
 		}
 	}
@@ -327,113 +326,50 @@ void OgreApp1::createWalls(void){
 //-------------------------------------------------------------------------------------
 void OgreApp1::createGuards(void){
 	
-	std::deque<Ogre::Vector3> positions;
-
-	positions.push_back( Ogre::Vector3(-8300, 0, 500));
-	positions.push_back( Ogre::Vector3(-400, 0, 500));
-	positions.push_back( Ogre::Vector3(-4000, 0, 0));
-	guardGroups.push_back((std::shared_ptr<GuardGroup>)new GuardGroup(mSceneMgr,"robot1.mesh", "Protector", 2, positions, Cyclic));
-
-	//second group up --2
-	positions.clear();
-	positions.push_back( Ogre::Vector3(-8300, 0, -3000));
-	positions.push_back( Ogre::Vector3(-400, 0, -3000));
-	positions.push_back( Ogre::Vector3(-4000, 0, -2500));
-	guardGroups.push_back((std::shared_ptr<GuardGroup>)new GuardGroup(mSceneMgr,"robot1.mesh", "Protector of God", 2, positions, Cyclic));
+	std::ifstream myfile;
+	myfile.open("../../media/mission/missionGuards.ogre");
 	
-	//3rd group up-down1 --2
-	positions.clear();
-	positions.push_back( Ogre::Vector3(-400, 0, -200));
-	positions.push_back( Ogre::Vector3(-350, 0, -200));
-	positions.push_back( Ogre::Vector3(-350, 0, -3000));
-	positions.push_back( Ogre::Vector3(-400, 0, -3000));
-	guardGroups.push_back((std::shared_ptr<GuardGroup>)new GuardGroup(mSceneMgr, "robot1.mesh", "Protector of Hell", 2, positions, Cyclic));
-	
-	//4th group up-down1 --2
-	positions.clear();
-	positions.push_back( Ogre::Vector3(-8250, 0, -200));
-	positions.push_back( Ogre::Vector3(-8200, 0, -200));
-	positions.push_back( Ogre::Vector3(-8200, 0, -3000));
-	positions.push_back( Ogre::Vector3(-8250, 0, -3000));
-	guardGroups.push_back((std::shared_ptr<GuardGroup>)new GuardGroup(mSceneMgr, "robot1.mesh", "Protector of Sky", 2, positions, Cyclic));
-	
-	//5th group middle-box --3
-	positions.clear();
-	positions.push_back( Ogre::Vector3(-4300, 0, -1650));
-	positions.push_back( Ogre::Vector3(-4300, 0, 0));
-	positions.push_back( Ogre::Vector3(-4700, 0, -1650));
-	positions.push_back( Ogre::Vector3(-4700, 0, 0));
-	guardGroups.push_back((std::shared_ptr<GuardGroup>)new GuardGroup(mSceneMgr, "robot1.mesh", "Protector of Sea", 3, positions, Cyclic));
-
-	//6th group under-box-line --5
-	positions.clear();
-	positions.push_back( Ogre::Vector3(-8000, 0, -350));
-	positions.push_back( Ogre::Vector3(-700, 0, -100));
-	positions.push_back( Ogre::Vector3(-8000, 0, -500));
-	positions.push_back( Ogre::Vector3(-4700, 0, -350));
-	positions.push_back( Ogre::Vector3(-700, 0, -350));
-	positions.push_back( Ogre::Vector3(-4700, 0, -100));
-	guardGroups.push_back((std::shared_ptr<GuardGroup>)new GuardGroup(mSceneMgr, "robot1.mesh", "Protector of Heaven", 5, positions, Cyclic));
-
-	//7th group upper-box-line --3
-	positions.clear();
-	positions.push_back( Ogre::Vector3(-4500, 0, -2700));
-	positions.push_back( Ogre::Vector3(-6300, 0, -2400));
-	positions.push_back( Ogre::Vector3(-2400, 0, -2400));
-	positions.push_back( Ogre::Vector3(-4500, 0, -2000));
-	guardGroups.push_back((std::shared_ptr<GuardGroup>)new GuardGroup(mSceneMgr, "robot1.mesh", "Protector of Darkness", 3, positions, Cyclic));
-
-
-	//8th group left-box-line --3
-	positions.clear();
-	positions.push_back( Ogre::Vector3(-7000, 0, 0));
-	positions.push_back( Ogre::Vector3(-7000, 0, -2700));		
-	positions.push_back( Ogre::Vector3(-7500, 0, -1350));
-	positions.push_back( Ogre::Vector3(-6500, 0, -1350));
-	positions.push_back( Ogre::Vector3(-7000, 0, -1350));
-	guardGroups.push_back((std::shared_ptr<GuardGroup>)new GuardGroup(mSceneMgr, "robot1.mesh", "Protector of Pain", 3, positions, Cyclic));
-
-	//9th group right-box-line --3
-	positions.clear();
-	positions.push_back( Ogre::Vector3(-1500, 0, 0));
-	positions.push_back( Ogre::Vector3(-1500, 0, -2700));
-	positions.push_back( Ogre::Vector3(-2100, 0, -1350));
-	positions.push_back( Ogre::Vector3(-1000, 0, -1350));
-	positions.push_back( Ogre::Vector3(-1500, 0, -1350));
-	guardGroups.push_back((std::shared_ptr<GuardGroup>)new GuardGroup(mSceneMgr, "robot1.mesh", "Protector of Himself", 3, positions, Cyclic));
-
-	//Random Guards --2
-	positions.clear();
-	positions.push_back( Ogre::Vector3(-8000, 0, -3000));
-	positions.push_back( Ogre::Vector3(  500, 0,   500));
-	guardGroups.push_back((std::shared_ptr<GuardGroup>)new GuardGroup(mSceneMgr, "robot1.mesh", "Protector of Chaos", 1, positions, Random));
-
-	positions.clear();
-	positions.push_back( Ogre::Vector3(-4000, 0, -1000));
-	positions.push_back( Ogre::Vector3(  0, 0,   0));
-	guardGroups.push_back((std::shared_ptr<GuardGroup>)new GuardGroup(mSceneMgr, "robot1.mesh", "Protector of Heart", 1, positions, Random));
-
-	//Line Guards --3
-	positions.clear();
-	positions.push_back( Ogre::Vector3(300, 0, -2800));
-	positions.push_back( Ogre::Vector3(300, 0,   0));
-	guardGroups.push_back((std::shared_ptr<GuardGroup>)new GuardGroup(mSceneMgr, "robot1.mesh", "Protector of Fear", 1, positions, Line));
-
-	positions.clear();
-	positions.push_back( Ogre::Vector3(-100, 0, -2800));
-	positions.push_back( Ogre::Vector3(-100, 0,   0));
-	guardGroups.push_back((std::shared_ptr<GuardGroup>)new GuardGroup(mSceneMgr, "robot1.mesh", "Protector of Terror", 1, positions, Line));
-
-	positions.clear();
-	positions.push_back( Ogre::Vector3(100, 0, -2700));
-	positions.push_back( Ogre::Vector3(100, 0, -1800));
-	guardGroups.push_back((std::shared_ptr<GuardGroup>)new GuardGroup(mSceneMgr, "robot1.mesh", "Protector of Begin", 1, positions, Line));
-
-	//Follow Guards --2
-	positions.clear();
-	positions.push_back( Ogre::Vector3(-1000, 0, -2800));
-	positions.push_back( Ogre::Vector3(-1000, 0,  -100));
-	guardGroups.push_back((std::shared_ptr<GuardGroup>)new GuardGroup(mSceneMgr, "robot1.mesh", "Protector of Your Path", 2, positions, Follower));
+	while(myfile.good())
+	{
+		std::deque<Ogre::Vector3> positions;
+		std::string st;
+		std::getline(myfile,st);
+		std::istringstream istr(st);
+		if(st!=""){
+			std::string name, type, mesh;
+			int num;
+			istr>>type;
+			istr>>mesh;
+			istr>>name;
+			istr>>num;
+			std::string pos;
+			do{
+				std::getline(myfile,st);
+				std::stringstream istrPos(st);
+				istrPos>>pos;
+				int x,y,z;
+				istrPos>>x;
+				istrPos>>y;
+				istrPos>>z;
+				positions.push_back( Ogre::Vector3(x, y, z));
+			}while(st!="" && pos=="position");
+			GuardType t;
+			if(type=="Cyclic"){
+				t=Cyclic;
+			}else{
+				if(type=="Line"){
+					t=Line;
+				}else{
+					if(type=="Random"){
+						t=Random;
+					}else{
+						t=Follower;
+					}
+				}
+			}
+			guardGroups.push_back((std::shared_ptr<GuardGroup>)new GuardGroup(mSceneMgr, mesh, name, num, positions, t));
+		}
+	}
 }
 //-------------------------------------------------------------------------------------
 ///Others
