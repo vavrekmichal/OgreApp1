@@ -37,7 +37,18 @@ public:
 
 private:
 	void setVolume(int diff);
+	int volume;
+	const int volumeDiff;
 	static const int overlayDurationConst;
+
+	irrklang::ISoundEngine* engine;
+	Ogre::Overlay* overlay;
+	std::vector<std::string> songNames;
+	irrklang::ISound* song;
+	int actualSongNumber;
+	int durationOverlay;
+	bool overlayIsShowed;
+	Ogre::TextAreaOverlayElement* musicTextArea;
 };
 
 #endif // #ifndef __Sound_h_

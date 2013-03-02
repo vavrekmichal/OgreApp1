@@ -33,7 +33,6 @@ protected:
 private:
 	Ogre::Overlay* remainOverlay;
 	Ogre::TextAreaOverlayElement* remainTextArea;
-	Ogre::Overlay* winOverlay;
 	int duration;
     bool remainIsShowed;
 	static const int overlayDurationConst;

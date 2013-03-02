@@ -22,5 +22,8 @@ public:
 
 private:
 	std::vector<std::shared_ptr<Guard>> guards;
+
+	std::string createName(const std::string& s, int i);
+	void rotateDeque(std::deque<Ogre::Vector3>& positions);
 };
 #endif // #ifndef __GuardGroup_h_

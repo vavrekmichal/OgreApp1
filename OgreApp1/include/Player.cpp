@@ -3,12 +3,14 @@
 #include <string>
 #include "OgreApp1.h"
 
-const float Player::mWalkSpeed = 2;
-const float Player::deathTimeDiff = 0.03;
-float Player::deathTime = 1;
 //-------------------------------------------------------------------------------------
 ///Creates player and set first animation Idle2
-Player::Player(Ogre::SceneManager* sceneManager, const std::string& playerMesh, const std::string& playerName, const Ogre::Vector3& startPosition)	
+Player::Player(Ogre::SceneManager* sceneManager, const std::string& playerMesh, const std::string& playerName, const Ogre::Vector3& startPosition)
+	:mWalkSpeed(200),
+	deathTimeDiff(0.03),
+	deathAnimeTime(0.015),
+	farFarAway(50),
+	deathTime(1)
 {
 	manager = sceneManager;
 	name=playerName;
@@ -40,11 +42,11 @@ void Player::update(float f){
 	Ogre::Vector3 playerMove = Ogre::Vector3(0,0,0);
 	mWalking = false;
 	if(goingForward && !collision(true)){
-		playerMove.z -= 200;
+		playerMove.z -= mWalkSpeed;
 		mWalking=true;
 	}
 	if(goingBack && !collision(false)){
-		playerMove.z += 200;
+		playerMove.z += mWalkSpeed;
 		mWalking=true;
 	}
 	sceneNode->translate(playerMove*f, Ogre::Node::TS_LOCAL); 
@@ -63,7 +65,7 @@ void Player::walk(float f){
 			mAnimationState = entity->getAnimationState("Walk");
 		}
 	} else { //Player's death
-		mAnimationState->addTime(0.015); //just one animation
+		mAnimationState->addTime(deathAnimeTime); //just one animation
 		mAnimationState = entity->getAnimationState("Death1");
 		deathTime-=deathTimeDiff;
 		if(deathTime<0){
@@ -79,11 +81,9 @@ bool Player::collision(bool goAhead){
 	Ogre::Ray ray = Ogre::Ray(sceneNode->getPosition(), getDirection(sceneNode->getOrientation(),goAhead));
 	Ogre::RaySceneQuery* mRaySceneQuery = manager->createRayQuery(ray);
 	Ogre::RaySceneQueryResult result = mRaySceneQuery->execute();
-
-	const float farfarAway = 50;
 	
 	for(Ogre::RaySceneQueryResult::iterator it = result.begin(); it != result.end() ; ++it){
-		if((it->distance < farfarAway)&& (it->distance > 0)){
+		if((it->distance < farFarAway)&& (it->distance > 0)){
 			return true;
 		}
 	}

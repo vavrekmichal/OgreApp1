@@ -2,10 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-const int Target::pickUpDistance= 700;
 //-------------------------------------------------------------------------------------
 ///Inicialization of sceneNode and entity
 Target::Target(Ogre::SceneManager* mSceneManager, const std::string& newName, const Ogre::Vector3& setPosition, Ogre::SceneNode* setCollector)
+	:rotateSpeed(0.5f),pickUpDistance(700)
 {
 	mesh = "ogrehead.mesh";
 	manager = mSceneManager;
@@ -26,7 +26,7 @@ Target::~Target(void)
 //-------------------------------------------------------------------------------------
 ///Just rotote on a place
 void Target::update(void){
-	sceneNode->yaw(Ogre::Degree( .5f));
+	sceneNode->yaw(Ogre::Degree( rotateSpeed));
 }
 //-------------------------------------------------------------------------------------
 ///This function is checking distance from player node. If target is near, so target is 

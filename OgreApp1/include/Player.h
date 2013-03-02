@@ -33,9 +33,12 @@ protected:
 	std::string mesh; //mesh of players SceneNode (in this case is ninja.mesh)
 	Ogre::Vector3 position; //players start position 
 	Ogre::SceneManager* manager;
-	static const float mWalkSpeed;  // The speed at which the object is moving
-	static float deathTime;   //duration of death animation;
-	static const float deathTimeDiff;   //duration of death animation;
+
+	const float mWalkSpeed;  // The speed at which the object is moving
+	float deathTime;   //duration of death animation;
+	const float deathTimeDiff;   //duration of death animation;
+	const float deathAnimeTime;
+	const int farFarAway;
 };
 
 #endif // #ifndef __Player_h_

@@ -34,11 +34,11 @@ protected:
     Ogre::Vector3 mDirection;              // The direction the object is moving
     Ogre::Vector3 mDestination;			   // The destination to go
 	
-
-	static const float mWalkSpeed;  // The speed at which the object is moving
-	static const std::string playerName;  // The name of hunting player
-
-private:
+	static const float inDestination;
+	static const int farFarAway;
+	const Ogre::Vector3 directionVector;
+	const float mWalkSpeed;  // The speed at which the object is moving
+	const std::string playerName;  // The name of hunting player
 	std::deque<Ogre::Vector3> mWalkList;   // The list of points we are walking to
 };
 

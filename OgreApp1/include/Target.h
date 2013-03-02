@@ -22,6 +22,8 @@ protected:
 	Ogre::Vector3 position; //position of the Target 
 	Ogre::SceneManager* manager; //SceneManager from main class -> to inicialized Entity and SceneNode
 	Ogre::SceneNode* collector; // Players SceneNode. In this case is Ninja (can pick up target)
-	static const int pickUpDistance;
+
+	const int pickUpDistance;
+	const float rotateSpeed;
 };
 #endif // #ifndef __Target_h_

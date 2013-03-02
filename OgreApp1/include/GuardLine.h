@@ -11,7 +11,6 @@ public:
 	virtual ~GuardLine(void);
 	virtual bool nextLocation(void);
 	virtual void update(float delay);
-private:
-	std::deque<Ogre::Vector3> mWalkList;   // The list of points to go
+
 };
 #endif // #ifndef __GuardLine_h_

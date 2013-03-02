@@ -3,28 +3,16 @@
 
 #pragma comment(lib, "irrKlang.lib") // link with irrKlang.dll
 
-irrklang::ISoundEngine* engine;
-std::vector<std::string> songNames;
-irrklang::ISound* song;
-int actualSongNumber = 0;
-Ogre::Overlay* overlay;
-int durationOverlay = 0;
-bool overlayIsShowed = false;
-Ogre::TextAreaOverlayElement* musicTextArea;
-
-//volume 
-int volume = 5;
-
-
 #ifdef _DEBUG
-    const int Sound::overlayDurationConst = 50;
+    const int Sound::overlayDurationConst(50);
 #else
-    const int Sound::overlayDurationConst = 500;
+    const int Sound::overlayDurationConst(500);
 #endif
 //-------------------------------------------------------------------------------------
 ///Load all songs, initializes overlay and play first
-Sound::Sound(const char* path, int width, int height)
+Sound::Sound(const char* path, int width, int height):volumeDiff(1),actualSongNumber(0),overlayIsShowed(false),durationOverlay(0)
 {
+	volume = 5; //50%
 	engine = irrklang::createIrrKlangDevice();
 	
 	struct dirent *entry;
@@ -147,11 +135,11 @@ void Sound::setVolume(int diff){
 }
 //-------------------------------------------------------------------------------------
 void Sound::increaseVolume(void){
-	setVolume(1);
+	setVolume(volumeDiff);
 }
 //-------------------------------------------------------------------------------------
 void Sound::decreaseVoleme(void){
-	setVolume(-1);
+	setVolume(-volumeDiff);
 }
 //-------------------------------------------------------------------------------------
 void Sound::nextSong(void){

@@ -21,6 +21,7 @@ public:
 protected:
 	std::vector<std::shared_ptr<Wall>> wallVector;
 	std::string genRandom( size_t length);
+	const int blockLength;
 };
 
 #endif // #ifndef __WallLine_h_

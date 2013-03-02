@@ -1,14 +1,14 @@
 #include "OgreApp1.h"
 #include "DieException.h"
 
-bool OgreApp1::gameRunning = true;
+bool OgreApp1::gameRunning (true);
 
 Ogre::Real mRotate;          // The rotate constant
 Ogre::Real mMove;            // The movement constant
  
 Ogre::Vector3 mDirection;     // Value to move in the correct direction
 
-static bool castOverlay = false;
+static bool castOverlay(false);
 Ogre::OverlayContainer* endPanel;
 Ogre::TextAreaOverlayElement* endTextArea;
 Ogre::Overlay* endOverlay;
@@ -20,7 +20,9 @@ OgreApp1::OgreApp1(void):
     goingLeft(false),
     goingUp(false),
     goingDown(false),
-    fastMove(false)
+    fastMove(false),
+	rotate(.15),
+	move(150)
 {
 }
 //-------------------------------------------------------------------------------------
@@ -39,10 +41,7 @@ void OgreApp1::createCamera(void)
     mCamera->lookAt(Ogre::Vector3(0,0,0));
     // set the near clip distance
     mCamera->setNearClipDistance(5);
- 
     mCameraMan = new OgreBites::SdkCameraMan(mCamera);
-
-	//mCameraMan->setStyle(CameraStyle.);
 }
  
 //-------------------------------------------------------------------------------------
@@ -51,7 +50,6 @@ void OgreApp1::createViewports(void)
 	// Create one viewport, entire window
     Ogre::Viewport* vp = mWindow->addViewport(mCamera);
     vp->setBackgroundColour(Ogre::ColourValue(0,0,0));
-    // Alter the camera aspect ratio to match the viewport
     mCamera->setAspectRatio(Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));  
 }
 //-------------------------------------------------------------------------------------
@@ -82,11 +80,10 @@ void OgreApp1::createScene(void)
 void OgreApp1::createFrameListener(void)
 {
 	BaseApplication::createFrameListener();
-	
  
 	// set the rotation and move speed
-	mRotate = 0.13;
-	mMove = 250;
+	mRotate = rotate;
+	mMove = move;
 	mDirection = Ogre::Vector3::ZERO;
 }
 //-------------------------------------------------------------------------------------
@@ -288,40 +285,44 @@ void OgreApp1::setLights(void){
 //-------------------------------------------------------------------------------------
 ///Creaters
 void OgreApp1::createWalls(void){
-	walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr, 1, 10, Ogre::Vector2(-200, 700), Front)); //first two are main streat right border
-	walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr, 1, 13, Ogre::Vector2(400, 700), Front));
-	walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr, 1, 30, Ogre::Vector2(550, 570), Left)); // bottom border
-	walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr, 1, 30, Ogre::Vector2(550, -3300), Left)); //up border
-	walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr, 1, 13, Ogre::Vector2(-8500, 700), Front)); //left border
+	std::ifstream myfile;
+	myfile.open("../../media/mission/missionSetter.ogre");
+	
+	while(myfile.good())
+	{
+		std::string st;
+		std::getline(myfile,st);
+		std::istringstream istr(st);
+		if(st!=""){
+			int height,width,x,y;
+			std::string stringType;
+			MyDirection type;
+			istr>>height;
+			istr>>width;
+			istr>>x;
+			istr>>y;
+			istr>>stringType;
+			if(stringType=="Front"){
+				type=Front;
+			}else{
+				if(stringType=="Back"){
+					type=Back;
+				}else{
+					if(stringType=="Left"){
+						type=Left;
+					}else{
+						if(stringType=="Right"){
+							type=Right;
+						}else{
 
-	//corners
-	walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr, 1, 3, Ogre::Vector2(-480, -2800), Left)); // up-right corner
-	walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr, 1, 3, Ogre::Vector2(-600, -2920), Back)); // up-right corner
-	walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr, 1, 3, Ogre::Vector2(-480, -0), Left)); // down-right corner
-	walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr, 1, 3, Ogre::Vector2(-600, 120), Front)); // down-right corner
-	walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr, 1, 3, Ogre::Vector2(-8220, 0), Right)); // down-left corner
-	walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr, 1, 3, Ogre::Vector2(-8100, 120), Front)); // down-left corner
-	walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr, 1, 3, Ogre::Vector2(-8220, -2800), Right)); // up-left corner
-	walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr, 1, 3, Ogre::Vector2(-8100, -2920), Back)); // up-left corner
-
-	//horontal lines
-	walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr, 1, 3, Ogre::Vector2(-3000, -0), Left)); // down-line-rightside
-	walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr, 1, 3, Ogre::Vector2(-6000, -0), Right)); // down-line-leftside
-	walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr, 1, 3, Ogre::Vector2(-3000, -2800), Left)); // up-line-rightside
-	walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr, 1, 3, Ogre::Vector2(-6000, -2800), Right)); // up-line-leftside
-
-	//vertical lines
-	walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr, 1, 3, Ogre::Vector2(-7900, -800), Front)); // left
-	walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr, 1, 3, Ogre::Vector2(-800, -800), Front)); // right
-	walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr, 1, 5, Ogre::Vector2(-6400, -400), Front)); // left
-	walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr, 1, 5, Ogre::Vector2(-2300, -400), Front)); // right
-
-	//middlebox
-	walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr, 1, 3, Ogre::Vector2(-5000, -800), Front)); // left
-	walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr, 1, 3, Ogre::Vector2(-4000, -800), Front)); // right
-	walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr, 1, 4, Ogre::Vector2(-5220, -1850), Right)); // up
-	walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr, 1, 1, Ogre::Vector2(-5220, -1000), Right)); // down-leftside
-	walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr, 1, 1, Ogre::Vector2(-3800, -1000), Left)); // down-rightside
+						}
+					}
+				}
+			}
+			
+			walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr, height, width, Ogre::Vector2(x, y), type));
+		}
+	}
 }
 //-------------------------------------------------------------------------------------
 void OgreApp1::createGuards(void){

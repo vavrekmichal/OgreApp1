@@ -49,6 +49,9 @@ protected:
 	std::vector<std::shared_ptr<WallLine>> walls;
 	std::vector<std::shared_ptr<GuardGroup>> guardGroups;
 
+	const float rotate;
+	const int move;
+
 private:
 	void setLights(void);
 	void setGround(void);

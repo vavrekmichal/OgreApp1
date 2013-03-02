@@ -3,11 +3,11 @@
 
 //-------------------------------------------------------------------------------------
 ///Create given number of wall in given direction
-WallLine::WallLine(Ogre::SceneManager* manager, int x, int y, const Ogre::Vector2& v, const MyDirection& m)
+WallLine::WallLine(Ogre::SceneManager* manager, int x, int y, const Ogre::Vector2& v, const MyDirection& m):blockLength(300)
 {
 	int a = 0;
 	int b = 0;
-	float c =160;
+	float c = blockLength/2;
 		
 	bool isHorizontal = false;
 	if(m ==Left || m == Right){
@@ -18,16 +18,16 @@ WallLine::WallLine(Ogre::SceneManager* manager, int x, int y, const Ogre::Vector
 		for (int j = 0; j < y; j++) {
 			switch (m) {
 				case Left:
-					a += -300;
+					a += -blockLength;
 					break;
 				case Right:
-					a += 300;
+					a += blockLength;
 					break;
 				case Front:
-					b += -300;
+					b += -blockLength;
 					break;
 				case Back:
-					b += 300;
+					b += blockLength;
 					break;
 				default:
 					break;
@@ -47,7 +47,7 @@ WallLine::WallLine(Ogre::SceneManager* manager, int x, int y, const Ogre::Vector
 					
 		}
 		a = 0; b = 0;
-		c += 300;
+		c += blockLength;
 	}
 }
 //-------------------------------------------------------------------------------------

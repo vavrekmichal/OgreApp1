@@ -1,18 +1,20 @@
 #include "Guard.h"
 #include "DieException.h"
 
-const float	Guard::mWalkSpeed=35;  // The speed at which the object is moving
-const std::string Guard::playerName = "Ninja";  // The name of hunting player
+
+const float Guard::inDestination(0.0001f);
+const int Guard::farFarAway(75);
 //-------------------------------------------------------------------------------------
-Guard::Guard(void){
+Guard::Guard(void):directionVector(1,0,0),playerName("Ninja"),mWalkSpeed(35){
 }
 //-------------------------------------------------------------------------------------
 ///This constructor create guard with one setted position vector3
 Guard::Guard(Ogre::SceneManager* sceneManager,const std::string& guardMesh,const std::string& guardName,const Ogre::Vector3& startPosition)
+	:directionVector(1,0,0),playerName("Ninja"),mWalkSpeed(35)
 {
 	manager = sceneManager;
 	name=guardName;
-	mesh=guardMesh; //mesh of players SceneNode (in this case is ninja.mesh)
+	mesh=guardMesh; //mesh of guards SceneNode (in this case is guard1.mesh)
 	entity = manager->createEntity(name,mesh);
 	sceneNode = manager->getRootSceneNode()->createChildSceneNode(name + "Node", startPosition);
 	entity->setCastShadows(true);
@@ -25,7 +27,9 @@ Guard::Guard(Ogre::SceneManager* sceneManager,const std::string& guardMesh,const
 }
 //-------------------------------------------------------------------------------------
 ///This constructor create guard with setted deque of vector3 which will be mWalkList
-Guard::Guard(Ogre::SceneManager* sceneManager,const std::string& guardMesh,const std::string& guardName, std::deque<Ogre::Vector3>& positions){
+Guard::Guard(Ogre::SceneManager* sceneManager,const std::string& guardMesh,const std::string& guardName, std::deque<Ogre::Vector3>& positions)	
+	:directionVector(1,0,0),playerName("Ninja"),mWalkSpeed(35)
+{
 	manager = sceneManager;
 	name=guardName;
 	mesh=guardMesh; //mesh of players SceneNode (in this case is ninja.mesh)
@@ -41,13 +45,12 @@ Guard::Guard(Ogre::SceneManager* sceneManager,const std::string& guardMesh,const
 	mDirection= Ogre::Vector3(0,0,0);
 }
 //-------------------------------------------------------------------------------------
-Guard::~Guard(void)
-{
+Guard::~Guard(void){
 	manager->destroyEntity(entity);
 	manager->destroySceneNode(sceneNode);
 }
 //-------------------------------------------------------------------------------------
-///Here is control mWalkList and also there are setted vectors for next location
+///Here is control of mWalkList and also there are setted vectors for next location
 bool Guard::nextLocation(void){
 	if (mWalkList.empty()){
 		return false;
@@ -63,12 +66,11 @@ bool Guard::nextLocation(void){
 ///This is main function of guards walking. Here is control if guard has some destination
 ///to go and setted animation Walk/Idle.
 void Guard::update(float delay){
-
 	mAnimationState->addTime(delay);
 	if (mDirection == Ogre::Vector3::ZERO){
         if (nextLocation()){
                 // Set walking animation
-			Ogre::Vector3 src = sceneNode->getOrientation() * Ogre::Vector3(1,0,0);
+			Ogre::Vector3 src = sceneNode->getOrientation() * directionVector;
 			Ogre::Quaternion quat = src.getRotationTo(mDirection);
 			sceneNode->rotate(quat);
             mAnimationState = entity->getAnimationState("Walk");         
@@ -103,16 +105,16 @@ bool Guard::collision(void){
 	Ogre::Ray ray(sceneNode->getPosition(), getDirection(sceneNode->getOrientation()));
 	Ogre::RaySceneQuery* mRaySceneQuery = manager->createRayQuery(ray);
 	Ogre::RaySceneQueryResult result = mRaySceneQuery->execute();
-	const float farfarAway = 15;
+	
 
 	for(Ogre::RaySceneQueryResult::iterator it= result.begin();
 		it!=result.end();
 		++it){
 		
-		if ((it->movable->getName() == playerName) && (it->distance < farfarAway * 5)) { //catch Ninja
+		if ((it->movable->getName() == playerName) && (it->distance < farFarAway )) { //catch Ninja
 			throw DieException("Hlidac "+name + "\nte polapil.");
 		}
-		if ((it->distance < farfarAway) && (it->distance > 0)) { //meet something else (Wall,Protector,...)
+		if ((it->distance < farFarAway) && (it->distance > 0)) { //meet something else (Wall,Guard,...)
 			return true;
 		}
 	}
@@ -122,8 +124,8 @@ bool Guard::collision(void){
 //-------------------------------------------------------------------------------------
 ///Translate quaternion into direction vector
  Ogre::Vector3 Guard::getDirection(const Ogre::Quaternion& q) const{
-	Ogre::Vector3 v(1, 0, 0); //facing in +z
-	v = q * v;  //transform the vector by the objects rotation.
+	Ogre::Vector3 v; //facing in +z
+	v = q * directionVector;  //transform the vector by the objects rotation.
 	return v;
 }
 //-------------------------------------------------------------------------------------
@@ -134,8 +136,8 @@ void Guard::goToNextLocation(void){
 		mAnimationState = entity->getAnimationState("Idle");
 	}else{
 		// Rotation Code will go here later
-		Ogre::Vector3 src = sceneNode->getOrientation() * Ogre::Vector3(1,0,0);
-		if ((1.0f + src.dotProduct(mDirection)) < .0001f) {
+		Ogre::Vector3 src = sceneNode->getOrientation() * directionVector;
+		if ((1.0f + src.dotProduct(mDirection)) < inDestination) {
 			sceneNode->yaw(Ogre::Degree(180));						
 		}else{
 			Ogre::Quaternion quat = src.getRotationTo(mDirection);
