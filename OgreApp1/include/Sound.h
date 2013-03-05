@@ -49,6 +49,7 @@ private:
 	int durationOverlay;
 	bool overlayIsShowed;
 	Ogre::TextAreaOverlayElement* musicTextArea;
+	const int startVolume;
 };
 
 #endif // #ifndef __Sound_h_

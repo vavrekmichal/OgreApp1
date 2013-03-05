@@ -41,7 +41,6 @@ void OgreApp1::createCamera(void)
     mCamera->lookAt(Ogre::Vector3(0,0,0));
     // set the near clip distance
     mCamera->setNearClipDistance(5);
-    mCameraMan = new OgreBites::SdkCameraMan(mCamera);
 }
  
 //-------------------------------------------------------------------------------------
@@ -373,7 +372,7 @@ void OgreApp1::createGuards(void){
 }
 //-------------------------------------------------------------------------------------
 ///Others
-void OgreApp1::updateCamera(const float f){
+void OgreApp1::updateCamera(float f){
 	mDirection=Ogre::Vector3(0,0,0);
 
 	float realSpeed = mMove;
@@ -412,12 +411,11 @@ void OgreApp1::updateCamera(const float f){
 
 //-------------------------------------------------------------------------------------
 void OgreApp1::endGame(void){
-
 	gameRunning=false;
 }
 
 //-------------------------------------------------------------------------------------
-void OgreApp1::lose( const std::string reason){
+void OgreApp1::lose( const std::string& reason){
 	if(!castOverlay){
 		castOverlay=true;
 		Ogre::OverlayManager& overlayManager = Ogre::OverlayManager::getSingleton(); 

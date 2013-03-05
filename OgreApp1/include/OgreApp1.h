@@ -59,9 +59,9 @@ private:
 	void setFog(void);
 	void createWalls(void);
 	void createGuards(void);
-	void lose(const std::string reason);
+	void lose(const std::string& reason);
 
-	void updateCamera(const float f);
+	void updateCamera(float f);
 	bool goingForward;
     bool goingBack;
     bool goingRight;

@@ -10,9 +10,9 @@
 #endif
 //-------------------------------------------------------------------------------------
 ///Load all songs, initializes overlay and play first
-Sound::Sound(const char* path, int width, int height):volumeDiff(1),actualSongNumber(0),overlayIsShowed(false),durationOverlay(0)
+	Sound::Sound(const char* path, int width, int height):volumeDiff(1),actualSongNumber(0),overlayIsShowed(false),durationOverlay(0),startVolume(5)
 {
-	volume = 5; //50%
+	volume = startVolume; //50%
 	engine = irrklang::createIrrKlangDevice();
 	
 	struct dirent *entry;
