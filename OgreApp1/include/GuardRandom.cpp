@@ -1,7 +1,7 @@
 #include "GuardRandom.h"
 
 //-------------------------------------------------------------------------------------
-GuardRandom::GuardRandom(void)
+GuardRandom::GuardRandom(void):minX(0),minY(0),maxX(0),maxY(0)
 {
 }
 

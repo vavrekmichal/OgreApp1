@@ -13,10 +13,10 @@ public:
 	virtual bool nextLocation(void);
 	virtual void update(float delay);
 private:
-	float minX;
-	float maxX;
-	float minY;
-	float maxY;
+	const float minX;
+	const float maxX;
+	const float minY;
+	const float maxY;
 	Ogre::Vector3 getRandomPosition(void);
 };
 #endif // #ifndef __GuardRandom_h_
