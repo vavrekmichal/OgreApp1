@@ -13,7 +13,6 @@ GuardRandom::~GuardRandom(void)
 ///Using base constructor a scale SceneNode (little smaller)
 GuardRandom::GuardRandom(Ogre::SceneManager* sceneManager, const std::string& guardMesh, const std::string& guardName, const Ogre::Vector3& down, const Ogre::Vector3& up)
 	:minX(down.x),minY(down.z),maxX(up.x),maxY(up.z),Guard(sceneManager,guardMesh, guardName, down){	
-		mDirection=Ogre::Vector3::ZERO;
 		sceneNode->scale(.8,.8,.8);
 }
 //-------------------------------------------------------------------------------------
