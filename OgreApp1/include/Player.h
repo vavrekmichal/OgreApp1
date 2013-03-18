@@ -1,10 +1,10 @@
 #ifndef __Player_h_
 #define __Player_h_
 
-#include <string>
 #include <OgreEntity.h>
 #include <OgreRoot.h>
 #include <OgreSceneManager.h>
+#include <string>
 
 class Player
 {

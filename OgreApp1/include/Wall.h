@@ -1,10 +1,11 @@
 #ifndef __Wall_h_
 #define __Wall_h_
 
-#include <string>
 #include <OgreEntity.h>
 #include <OgreRoot.h>
 #include <OgreSceneManager.h>
+#include <string>
+
 
 class Wall
 {

@@ -1,9 +1,6 @@
 #ifndef __Mission_h_
 #define __Mission_h_
 
-#include "Target.h"
-#include <string>
-#include <vector>
 #include <OgreEntity.h>
 #include <OgreRoot.h>
 #include <OgreSceneManager.h>
@@ -13,7 +10,8 @@
 #include <OISMouse.h>
 #include <SdkTrays.h>
 #include <SdkCameraMan.h>
-
+#include "Target.h"
+#include <vector>
 
 class Mission
 {

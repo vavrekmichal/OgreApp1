@@ -1,10 +1,10 @@
 #ifndef __Target_h_
 #define __Target_h_
 
-#include <string>
 #include <OgreEntity.h>
 #include <OgreRoot.h>
 #include <OgreSceneManager.h>
+#include <string>
 
 class Target
 {

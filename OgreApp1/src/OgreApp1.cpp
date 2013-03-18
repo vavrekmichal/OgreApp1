@@ -293,7 +293,8 @@ void OgreApp1::createWalls(void){
 		std::getline(myfile,st);
 		std::istringstream istr(st);
 		if(st!=""){
-			int height,width,x,y;
+			int  height,width;
+			Ogre::Real x,y;
 			std::string stringType;
 			MyDirection type;
 			istr>>height;
@@ -318,7 +319,11 @@ void OgreApp1::createWalls(void){
 					}
 				}
 			}	
-			walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr, height, width, Ogre::Vector2(x, y), type));
+			walls.push_back((std::shared_ptr<WallLine>)new WallLine(mSceneMgr,
+				height,
+				width,
+				Ogre::Vector2(x, y),
+				type));
 		}
 	}
 }
@@ -346,7 +351,7 @@ void OgreApp1::createGuards(void){
 				std::getline(myfile,st);
 				std::stringstream istrPos(st);
 				istrPos>>pos;
-				int x,y,z;
+				Ogre::Real x,y,z;
 				istrPos>>x;
 				istrPos>>y;
 				istrPos>>z;

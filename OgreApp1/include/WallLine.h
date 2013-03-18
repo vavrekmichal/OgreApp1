@@ -1,13 +1,11 @@
 #ifndef __WallLine_h_
 #define __WallLine_h_
 
-#include <string>
-#include <vector>
 #include <OgreEntity.h>
 #include <OgreRoot.h>
 #include <OgreSceneManager.h>
 #include "Wall.h"
-
+#include <vector>
 
 enum MyDirection {Left, Right, Front, Back};
 

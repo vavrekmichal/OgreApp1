@@ -1,7 +1,8 @@
-
 #ifndef __BaseApplication_h_
 #define __BaseApplication_h_
 
+#pragma warning(push)
+#pragma warning(disable: 4251)
 #include <OgreCamera.h>
 #include <OgreEntity.h>
 #include <OgreLogManager.h>
@@ -18,6 +19,9 @@
 
 #include <SdkTrays.h>
 #include <SdkCameraMan.h>
+#pragma warning(disable: 4193)
+#pragma warning(pop)
+#pragma warning(disable: 4193)
 
 class BaseApplication : public Ogre::FrameListener, public Ogre::WindowEventListener, public OIS::KeyListener, public OIS::MouseListener, OgreBites::SdkTrayListener
 {

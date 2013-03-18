@@ -1,8 +1,10 @@
 #ifndef __OgreApp1_h_
 #define __OgreApp1_h_
 
-#include "Sound.h" 
 #include "BaseApplication.h"
+
+
+#include "Sound.h" 
 #include "Player.h"
 #include "WallLine.h"
 
@@ -50,7 +52,7 @@ protected:
 	std::vector<std::shared_ptr<GuardGroup>> guardGroups;
 
 	const float rotate;
-	const int move;
+	const Ogre::Real move;
 
 private:
 	void setLights(void);

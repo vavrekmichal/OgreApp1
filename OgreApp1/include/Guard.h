@@ -1,11 +1,10 @@
 #ifndef __Guard_h_
 #define __Guard_h_
 
-#include <string>
 #include <OgreEntity.h>
 #include <OgreRoot.h>
 #include <OgreSceneManager.h>
-
+#include <string>
 
 class Guard
 {
